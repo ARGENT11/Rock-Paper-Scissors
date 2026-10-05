@@ -13,7 +13,7 @@ function getComputerChoice() {
 
 function getHumanChoice() {
   const choice = prompt(
-    "Enter your choice: Rock, Paper, or Scissors",
+    "Enter your choice: Rock, Paper, Scissors, or secret Gun",
   ).toLowerCase();
   switch (choice) {
     case "rock":
@@ -22,6 +22,10 @@ function getHumanChoice() {
       return "Paper";
     case "scissors":
       return "Scissors";
+    case "gun":
+      return "Gun";
+    default:
+      return getHumanChoice();
   }
 }
 
@@ -38,12 +42,23 @@ function playGame() {
       console.log(result);
       return result;
     } else if (
+      (humanChoice === "Gun" && computerChoice !== "Gun") ||
       (humanChoice === "Rock" && computerChoice === "Scissors") ||
       (humanChoice === "Paper" && computerChoice === "Rock") ||
       (humanChoice === "Scissors" && computerChoice === "Paper")
     ) {
       humanScore++;
-      const result = `You win! ${humanMove} beats ${computerMove}.`;
+      const result = `You win! ${humanMove} beats ${computerMove}. Pew pew!`;
+      console.log(result);
+      return result;
+    } else if (
+      (computerChoice === "Gun" && humanChoice !== "Gun") ||
+      (computerChoice === "Rock" && humanChoice === "Scissors") ||
+      (computerChoice === "Paper" && humanChoice === "Rock") ||
+      (computerChoice === "Scissors" && humanChoice === "Paper")
+    ) {
+      computerScore++;
+      const result = `You lose! ${computerMove} beats ${humanMove}. The computer drew a gun. `;
       console.log(result);
       return result;
     } else {
